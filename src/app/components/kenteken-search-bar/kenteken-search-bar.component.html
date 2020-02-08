@@ -1,0 +1,10 @@
+<form [formGroup]="kentekenForm" (ngSubmit)="submitKenteken()" class="searchbar-container">
+    <ion-row class="form-kenteken-fade" [class.form-kenteken-fade--wrong]="this.invalidKenteken">
+        <ion-input placeholder="Kenteken" formControlName="kenteken" required type="text" class="ion-text-uppercase"></ion-input>
+    </ion-row>
+    <ion-row>
+        <ion-button type="submit">
+            <ion-icon icon="search" color="kenteken">Zoeken</ion-icon>
+        </ion-button>
+    </ion-row>
+</form>

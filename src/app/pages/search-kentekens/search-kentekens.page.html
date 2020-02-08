@@ -1,0 +1,34 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button><img src="../../../assets/icon/icon-24-hamburger.svg" alt="hamburger icon"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Kentekens zoeken</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="base">
+    <div class="container">
+        <h1>Kenteken zoeken</h1>
+        <app-kenteken-search-bar  (notify)="getKenteken($event)"></app-kenteken-search-bar>
+
+        <div class="search_result" [hidden]="searching" *ngIf="this.placementCategories !== undefined">
+            <h3 class="heading">Resultaten</h3>
+                <div class="information" *ngFor="let infoCard of placementCategories; let i = index">
+                    <h2>{{ infoCard.name }}</h2>
+                    <ion-row *ngFor="let detailInfo of infoCard.items">
+                        <h6>{{ detailInfo.title }}</h6>
+                        <p *ngIf="detailInfo.item !== undefined; else notFound">{{ detailInfo.item }}</p>
+                        <ng-template #notFound>
+                            <p> - </p>
+                        </ng-template>
+                    </ion-row>
+                </div>
+        </div>
+
+        <div class="spinner">
+            <ion-spinner [hidden]="!searching"></ion-spinner>
+        </div>
+
+    </div>
+</ion-content>

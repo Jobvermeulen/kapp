@@ -1,0 +1,19 @@
+.searchbar-container {
+    //background-color: #FCFCFC;
+    //padding: 15px 0 15px 0;
+
+    .form-kenteken-fade{
+        background-color: #FFFFFF;
+    }
+
+    ion-input {
+        width: 100%;
+        background: #FFFFFF;
+    }
+
+    ion-button {
+        width: 100%;
+        --background: var(--ion-color-dark-tint);
+        margin: 10px 0 0 0;
+    }
+}

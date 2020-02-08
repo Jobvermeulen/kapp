@@ -1,0 +1,22 @@
+ion-menu {
+    ion-header {
+        ion-toolbar {
+            img {
+                width: 45px;
+                height: 45px;
+            }
+        }
+    }
+
+    .menuActiveItem{
+        ion-icon{
+            color: var(--ion-color-kenteken-border);
+        }
+
+        ion-label{
+            color: var(--ion-color-kenteken-border) !important;
+        }
+    }
+}
+
+

@@ -1,5 +1,7 @@
 {
   "name": "Kapp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
