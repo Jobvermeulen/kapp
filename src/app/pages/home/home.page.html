@@ -1,20 +1,38 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button><img src="../../../assets/icon/icon-24-hamburger.svg" alt="hamburger icon"></ion-menu-button>
-    </ion-buttons>
-    <ion-title>
-      KAPP
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button><img src="../../../assets/icon/icon-24-hamburger.svg" alt="hamburger icon"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            KAPP
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card class="welcome-card">
-    <ion-card-content>
-      <h1>
-        Kapp staat voor kenteken app. Met de app kan je kentekens opzoeken.
-      </h1>
-    </ion-card-content>
-  </ion-card>
+    <div class="container" [@fadein]>
+        <div class="welcome-card">
+            <h1>
+                Kapp
+            </h1>
+            <h3>De enige echte kenteken <br> zoek app</h3>
+            <ion-button color="dark" [routerDirection]="'root'" routerLink="/search-kentekens">
+                Start gelijk met zoeken
+                <ion-icon icon="search" color="kenteken" class="ion-padding-start"></ion-icon>
+            </ion-button>
+        </div>
+
+        <div class="information" *ngIf="this.favoriteCars !== null && this.favoriteCars.length !== 0">
+            <h2>Favorieten</h2>
+            <ul>
+                <li *ngFor="let car of this.favoriteCars" (click)="this.goToKentekenSearch(car.kenteken)">
+                    <h6>{{car.kenteken}}</h6>
+                    <p>{{car.merk}}</p>
+                    <p>{{car.handelsbenaming}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
 </ion-content>

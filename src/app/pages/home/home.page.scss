@@ -1,4 +1,11 @@
-.welcome-card img {
-  max-height: 35vh;
-  overflow: hidden;
+.welcome-card {
+  text-align: center;
+
+  h1{
+    padding-bottom: 10px;
+  }
+
+  h3{
+    line-height: 24pt;
+  }
 }

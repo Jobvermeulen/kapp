@@ -10,6 +10,8 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {KentekenSearchBarModule} from './components/kenteken-search-bar/kenteken-search-bar.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {IonicStorageModule} from '@ionic/storage';
 
 @NgModule({
     declarations: [AppComponent],
@@ -19,6 +21,8 @@ import {KentekenSearchBarModule} from './components/kenteken-search-bar/kenteken
         IonicModule.forRoot(),
         AppRoutingModule,
         HttpClientModule,
+        BrowserAnimationsModule,
+        IonicStorageModule.forRoot(),
     ],
     providers: [
         KentekenSearchBarModule,

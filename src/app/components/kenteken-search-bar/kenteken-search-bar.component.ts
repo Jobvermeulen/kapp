@@ -1,10 +1,12 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
+import {AppComponent} from '../../app.component';
 
 @Component({
     selector: 'app-kenteken-search-bar',
     templateUrl: './kenteken-search-bar.component.html',
     styleUrls: ['./kenteken-search-bar.component.scss'],
+    animations: [AppComponent.animations]
 })
 export class KentekenSearchBarComponent implements OnInit {
     @Output() notify: EventEmitter<string> = new EventEmitter<string>();

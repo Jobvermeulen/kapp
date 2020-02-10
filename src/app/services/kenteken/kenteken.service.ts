@@ -52,7 +52,6 @@ export class KentekenService {
                     for (const key of this.carIsseus) {
                         key.gebrek_identificatie_text = await this.getIssueByCode(key.gebrek_identificatie);
                     }
-                    console.log(this.carIsseus);
                 } else {
                     this.throwNotFoundError();
                 }

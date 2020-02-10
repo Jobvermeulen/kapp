@@ -1,23 +1,43 @@
 import {Component, OnInit} from '@angular/core';
 import {KentekenService} from '../../services/kenteken/kenteken.service';
-import {AlertController} from '@ionic/angular';
+import {AlertController, NavController} from '@ionic/angular';
 import {ICar} from '../../interfaces/ICar';
 import {ICarFuel} from '../../interfaces/ICarFuel';
+import {AppComponent} from '../../app.component';
+import {FavoriteCarService} from '../../services/favoriteCar/favorite-car.service';
+import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 
 @Component({
     selector: 'app-search-kentekens',
     templateUrl: './search-kentekens.page.html',
     styleUrls: ['./search-kentekens.page.scss'],
+    animations: [AppComponent.animations]
+
 })
 export class SearchKentekensPage implements OnInit {
     searching = false;
     placementCategories = undefined;
+    favorite = false;
+    passedKenteken: string;
 
     constructor(private kentekenService: KentekenService,
-                public alertController: AlertController) {
+                public alertController: AlertController,
+                private favoriteCarService: FavoriteCarService,
+                private route: ActivatedRoute,
+                private router: Router,
+                private navCtrl: NavController,
+    ) {
+        this.route.queryParams.subscribe(params => {
+            if (this.router.getCurrentNavigation().extras.state) {
+                this.passedKenteken = this.router.getCurrentNavigation().extras.state.passingKenteken;
+            }
+        });
     }
 
     ngOnInit() {
+        if (this.passedKenteken) {
+            this.getKenteken(this.passedKenteken);
+        }
     }
 
     async getKenteken(kenteken) {
@@ -26,8 +46,12 @@ export class SearchKentekensPage implements OnInit {
             await this.kentekenService.getKenteken(kenteken);
             await this.kentekenService.getFuel(kenteken);
 
-            this.buildCategories(this.kentekenService.car, this.kentekenService.carFuel);
+            await this.favoriteCarService.checkFavorite(this.kentekenService.car)
+                .then(favorite => {
+                    this.favorite = favorite;
+                });
 
+            this.buildCategories(this.kentekenService.car, this.kentekenService.carFuel);
         } catch (e) {
             const alert = await this.alertController.create({
                 header: 'Geen resultaat',
@@ -42,7 +66,39 @@ export class SearchKentekensPage implements OnInit {
         this.searching = false;
     }
 
+    async addToFavorites() {
+        try {
+            await this.favoriteCarService.setFavorite(this.kentekenService.car)
+                .then(() => {
+                    console.log('Added to favorites!');
+                    this.favorite = true;
+                });
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
+    async removeFavorite() {
+        try {
+            await this.favoriteCarService.removeFavorite(this.kentekenService.car)
+                .then(() => {
+                    console.log('Removed to favorites!');
+                    this.favorite = false;
+                });
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    goToHistory() {
+        const queryParams: NavigationExtras = {
+            state : {
+                passingKenteken: this.kentekenService.car.kenteken
+            }
+        };
+
+        this.navCtrl.navigateForward(['kenteken-history'], queryParams);
+    }
 
     buildCategories(car: ICar, carFuel: ICarFuel) {
         this.placementCategories = [

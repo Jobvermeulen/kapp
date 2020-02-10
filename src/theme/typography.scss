@@ -6,8 +6,8 @@
 //}
 
 :root,
-:root[mode='md'],
-:root[mode='ios']{
+.ios,
+.md{
     h1,
     h2,
     h3,
@@ -35,9 +35,7 @@ a {
 }
 
 p, .card-content-md p {
-    color: var(--ion-color-gray);
     font-size: rem-calc(16);
-    line-height: 2;
 }
 
 .card-content-md h1,
@@ -51,6 +49,11 @@ h2 {
     font-size: rem-calc(26);
     font-weight: 500;
     line-height: 32pt;
+}
+
+h1, h2{
+    border-bottom: 4px solid var(--ion-color-kenteken);
+    margin: 30px;
 }
 
 .card-content-md h3,

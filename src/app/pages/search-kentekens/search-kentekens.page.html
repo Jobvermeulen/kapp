@@ -8,13 +8,20 @@
 </ion-header>
 
 <ion-content class="base">
-    <div class="container">
+    <div class="container" [@fadein]>
         <h1>Kenteken zoeken</h1>
         <app-kenteken-search-bar  (notify)="getKenteken($event)"></app-kenteken-search-bar>
 
         <div class="search_result" [hidden]="searching" *ngIf="this.placementCategories !== undefined">
             <h3 class="heading">Resultaten</h3>
-                <div class="information" *ngFor="let infoCard of placementCategories; let i = index">
+            <div class="optionsGrid">
+                <button class="gridBtn" (click)="this.addToFavorites()" *ngIf="!favorite"><img src="../../../assets/icon/star_outline.png" alt="outlined star">Voeg aan favorieten toe</button>
+                <button class="gridBtn" (click)="this.removeFavorite()" *ngIf="favorite"><img src="../../../assets/icon/star_filled.png" alt="filled star">Haal uit favorieten toe</button>
+
+                <button class="gridBtn" (click)="this.goToHistory()"><img src="../../../assets/icon/history.png" alt="history icon"></button>
+            </div>
+
+                <div class="information" *ngFor="let infoCard of placementCategories; let i = index" [@fadein] [@slidelefttitle]>
                     <h2>{{ infoCard.name }}</h2>
                     <ion-row *ngFor="let detailInfo of infoCard.items">
                         <h6>{{ detailInfo.title }}</h6>

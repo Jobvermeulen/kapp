@@ -8,9 +8,9 @@
 </ion-header>
 
 <ion-content>
-    <div class="container">
+    <div class="container" [@fadein]>
         <h1>Zoek historie</h1>
-        <app-kenteken-search-bar (notify)="getKenteken($event)"></app-kenteken-search-bar>
+<!--        <app-kenteken-search-bar (notify)="getKenteken($event)"></app-kenteken-search-bar>-->
 
         <div class="search_result" [hidden]="searching" *ngIf="this.placementCategories !== undefined">
             <h3 class="heading">Resultaten</h3>
