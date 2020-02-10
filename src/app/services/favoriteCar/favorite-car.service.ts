@@ -28,7 +28,11 @@ export class FavoriteCarService {
         return this.storage.get(this.storageAccessor)
             .then(async result => {
                 const favoriteCar: IFavoriteCar = await this.setFavoriteCarObject(car);
-                result.splice(result.indexOf(favoriteCar), 1);
+                const index = result.map(favCar => {
+                    return favCar.kenteken;
+                }).indexOf(favoriteCar.kenteken);
+
+                result.splice(index, 1);
                 return this.storage.set(this.storageAccessor, result);
             });
     }
